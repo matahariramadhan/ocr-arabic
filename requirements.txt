@@ -1,0 +1,2 @@
+pytesseract
+pdf2image>=1.16.0,<2.0.0
