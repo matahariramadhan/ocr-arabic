@@ -45,6 +45,7 @@ def main():
 
             # take 7 last character as imageName exluding .ppm extension
             imageName = imageName[-7:-4]
+            imageName = imageName.split('-')[1]
 
             fullTempPath = os.path.join(tempDir, imageName+".txt")
 
@@ -57,7 +58,7 @@ def main():
         for file in os.listdir(tempDir):
             file_extension = "q"+file[:]
             if file_extension[-4:] == '.txt':
-                zipObj.write(os.path.join(tempDir, file))
+                zipObj.write(os.path.join(tempDir, file), file)
 
         zipObj.close()
 
