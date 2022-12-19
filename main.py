@@ -44,8 +44,8 @@ def main():
             text = pt.image_to_string(img, config="-l ara")
 
             # take 7 last character as imageName exluding .ppm extension
-            imageName = imageName[-7:-4]
-            imageName = imageName.split('-')[1]
+            imageName = imageName.split('-')[-1:][0]
+            imageName = imageName[:-4]
 
             fullTempPath = os.path.join(tempDir, imageName+".txt")
 
