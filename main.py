@@ -4,6 +4,7 @@ import tempfile
 from PIL import Image
 import pytesseract as pt
 from pdf2image import convert_from_path
+from zipfile import ZipFile
 
 
 def main():
@@ -45,12 +46,20 @@ def main():
             # take 7 last character as imageName exluding .ppm extension
             imageName = imageName[-7:-4]
 
-            fullTempPath = os.path.join(result_path, imageName+".txt")
+            fullTempPath = os.path.join(tempDir, imageName+".txt")
 
             # saving the  text for every image in a separate .txt file
-            file = open(fullTempPath, "w", encoding="utf-16")
-            file.write(text)
-            file.close()
+            with open(fullTempPath, "w", encoding="utf-16") as file:
+                file.write(text)
+
+        # zip all text result in temp directory
+        zipObj = ZipFile(result_path + "Result.zip", 'w')
+        for file in os.listdir(tempDir):
+            file_extension = "q"+file[:]
+            if file_extension[-4:] == '.txt':
+                zipObj.write(os.path.join(tempDir, file))
+
+        zipObj.close()
 
     print('Done! Your text is ready now')
 
