@@ -7,29 +7,34 @@ from pdf2image import convert_from_path
 from zipfile import ZipFile
 
 
+def get_user_input(message: str, error_message='Please provide the asked input') -> str:
+    '''
+    Get user input and prevent user to leave it blank
+    '''
+    user_input = ""
+
+    while user_input == "":
+        user_input = input(message)
+
+        # prevent user to leave the input blank
+        if user_input == "":
+            print(error_message, end=", ")
+            exit = input(
+                'wanna exit?(y/N): ')
+            if exit == "y" or exit == "Y":
+                sys.exit('Exiting the program')
+
+    return user_input
+
+
 def main():
-    pdf_path = ""
-    result_path = ""
+    print('Welcome to Arabic OCR by Matahari Ramadhan!')
+    print('You can convert your arabic pdf file to txt easily\n')
 
-    # Asking path to pdf that want to be converted
-    while pdf_path == "":
-        pdf_path = input("Enter full path to pdf: ")
-        if pdf_path == "":
-            exit = input(
-                'Please enter the full path of pdf!, wanna exit?(y/N): ')
-            if exit == "y" or exit == "Y":
-                print('Exiting!')
-                sys.exit()
-
-    # Asking path to save the result
-    while result_path == "":
-        result_path = input("Enter the path to save the result: ")
-        if result_path == "":
-            exit = input(
-                'Please enter the full path to save the result!, wanna exit?(y/N): ')
-            if exit == "y" or exit == "Y":
-                print('Exiting!')
-                sys.exit()
+    pdf_path = get_user_input(
+        "Enter full path of file you want to convert: ", "Please enter full path of file you want to convert")
+    result_path = get_user_input(
+        "Enter the path to save the result: ", "Please enter the path to save the result")
 
     # initialize temorary directory
     with tempfile.TemporaryDirectory() as tempDir:
