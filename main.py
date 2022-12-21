@@ -1,5 +1,5 @@
 import sys
-from ocr import OCR
+from ocr_arabic import OCR
 
 
 def get_user_input(message: str, error_message='Please provide the asked input') -> str:
