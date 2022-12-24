@@ -9,19 +9,16 @@ from PIL import Image
 class OCR:
     '''OCR that can convert pdf or image to text'''
 
-    def __init__(self) -> None:
+    def __init__(self, file_path: str) -> None:
+        self.file_path = file_path
         pass
 
-    def convert_file_to_zip(self, file_path: str, output_folder: str) -> None:
-        '''
-        Convert pdf to zip
-
-        Convert pdf to text and archive the result to Result.zip then store it in output folder
-        '''
+    def convert_file_to_zip(self, output_folder: str) -> None:
+        '''Convert pdf to text and archive the result to Result.zip then store it in output folder'''
         # initialize temorary directory
         with tempfile.TemporaryDirectory() as tempDir:
             # convert pdf to image
-            convert_from_path(file_path, output_folder=tempDir)
+            convert_from_path(self.file_path, output_folder=tempDir)
 
             # iterating the images inside the folder
             for imageName in os.listdir(tempDir):
