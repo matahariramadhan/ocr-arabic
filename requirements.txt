@@ -1,2 +1,5 @@
-pytesseract
+pytesseract==0.3.10
 pdf2image>=1.16.0,<2.0.0
+pytest>=7.2.0,<8.0.0
+opencv-python>=4.6.0.66,<4.7.0.0
+tqdm>=4.64.1,<5.0.0 

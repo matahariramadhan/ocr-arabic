@@ -4,6 +4,7 @@ import pytesseract as pt
 from zipfile import ZipFile
 from pdf2image import convert_from_path
 from PIL import Image
+from tqdm import tqdm
 
 
 class OCR:
@@ -18,10 +19,11 @@ class OCR:
         # initialize temorary directory
         with tempfile.TemporaryDirectory() as tempDir:
             # convert pdf to image
+            print('Initializing...')
             convert_from_path(self.file_path, output_folder=tempDir)
 
             # iterating the images inside the folder
-            for imageName in os.listdir(tempDir):
+            for imageName in tqdm(os.listdir(tempDir)):
                 img = Image.open(os.path.join(tempDir, imageName))
 
                 # convert img to string (arabic) with pytesseract

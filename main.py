@@ -13,7 +13,7 @@ def get_user_input(message: str, error_message='Please provide the asked input')
 
         # prevent user to leave the input blank
         if user_input == "":
-            print(error_message, end=", ")
+            print('\n'+error_message, end=", ")
             exit = input(
                 'wanna exit?(y/N): ')
             if exit == "y" or exit == "Y":
@@ -31,8 +31,8 @@ def main():
     result_path = get_user_input(
         "Enter the path to save the result: ", "Please enter the path to save the result")
 
-    ocr = OCR()
-    ocr.convert_file_to_zip(file_path=pdf_path, output_folder=result_path)
+    ocr = OCR(file_path=pdf_path)
+    ocr.convert_file_to_zip(output_folder=result_path)
 
     print('Done! Your text is ready now')
 
