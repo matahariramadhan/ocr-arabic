@@ -32,7 +32,7 @@ def main():
         "Enter the path to save the result: ", "Please enter the path to save the result")
 
     ocr = OCR(file_path=pdf_path)
-    ocr.convert_file_to_zip(output_folder=result_path)
+    ocr.convert_to_txt(output_folder=result_path)
 
     print('Done! Your text is ready now')
 
